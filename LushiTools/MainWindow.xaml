@@ -1,0 +1,65 @@
+﻿<Window x:Class="LushiTools.FloatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FloatingWindow" 
+        Width="100"
+        Height="100"
+        WindowStyle="None"
+        Topmost="True"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Loaded="Window_Loaded"
+        MouseRightButtonDown="Window_MouseRightButtonDown"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+           ShowInTaskbar="False"
+        >
+
+   
+        <Border  Background="#884FA4D6"
+        CornerRadius="100"
+        BorderThickness="0" >
+            <TextBlock x:Name="textBlock" Text="一 键 拔 线"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Foreground="Black" FontWeight="Bold" Opacity="0.8" >
+
+                <TextBlock.RenderTransform>
+                    <ScaleTransform x:Name="TextScaleTransform" ScaleX="1" ScaleY="1"
+                                    CenterX="50" CenterY="10"/>
+                </TextBlock.RenderTransform>
+
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- 文字轻微放大 -->
+                                <DoubleAnimation Storyboard.TargetName="TextScaleTransform" 
+                                                 Storyboard.TargetProperty="ScaleX" 
+                                                 To="1.2" Duration="0:0:0.3"/>
+                                <DoubleAnimation Storyboard.TargetName="TextScaleTransform" 
+                                                 Storyboard.TargetProperty="ScaleY" 
+                                                 To="1.2" Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- 恢复文字大小 -->
+                                <DoubleAnimation Storyboard.TargetName="TextScaleTransform" 
+                                                 Storyboard.TargetProperty="ScaleX" 
+                                                 To="1.0" Duration="0:0:0.3"/>
+                                <DoubleAnimation Storyboard.TargetName="TextScaleTransform" 
+                                                 Storyboard.TargetProperty="ScaleY" 
+                                                 To="1.0" Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+ 
+    </Border>
+ 
+</Window>
